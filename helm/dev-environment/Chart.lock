@@ -1,0 +1,30 @@
+dependencies:
+- name: hsma-common
+  repository: file://../hsma-common
+  version: 0.1.0
+- name: eureka-server
+  repository: file://../hsma-services/eureka-server
+  version: 0.1.0
+- name: appointment-service
+  repository: file://../hsma-services/appointment-service
+  version: 0.1.0
+- name: mail-service
+  repository: file://../hsma-services/mail-service
+  version: 0.1.0
+- name: post-feed-service
+  repository: file://../hsma-services/post-feed-service
+  version: 0.1.0
+- name: post-service
+  repository: file://../hsma-services/post-service
+  version: 0.1.0
+- name: relationship-service
+  repository: file://../hsma-services/relationship-service
+  version: 0.1.0
+- name: user-management-service
+  repository: file://../hsma-services/user-management-service
+  version: 0.1.0
+- name: api-gateway-service
+  repository: file://../hsma-services/api-gateway-service
+  version: 0.1.0
+digest: sha256:15278256eb8327e41d84a5b46db9f98ff678df763de8e2a467965d4a9454c4db
+generated: "2023-06-18T19:30:40.4155261+03:00"

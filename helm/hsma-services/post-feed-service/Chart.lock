@@ -1,0 +1,6 @@
+dependencies:
+- name: hsma-common
+  repository: file://../../hsma-common
+  version: 0.1.0
+digest: sha256:913309693dabac2cfab7fd36324c4f7bf3ab457e48fed424693f3c77eeb943a0
+generated: "2023-06-18T15:59:58.9684945+03:00"

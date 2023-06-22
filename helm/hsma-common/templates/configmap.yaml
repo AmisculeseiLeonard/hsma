@@ -1,0 +1,13 @@
+{{- define "common.configmap" -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.global.configMapName }}
+data:
+  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: {{ .Values.global.eurekaServerURL }}
+  SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS: {{ .Values.global.kafkaBrokerURL }}
+  MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: {{ .Values.global.zipkinBaseURL }}
+  MAIL_URL_VALIDATION: {{ .Values.global.urlValidation}}
+  MAIL_ACCEPT_APPOINTMENT: {{ .Values.global.urlAcceptAppointment}}
+  MAIL_REFUSE_APPOINTMENT: {{ .Values.global.urlRefuseAppointment}}
+{{- end -}}

@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-management-configmap
+data:
+  spring.data.mongodb.uri: mongodb://hsma:hsma@mongodb.default:27017/user-management
+  spring.cloud.stream.kafka.binder.brokers: kafka.default.svc.cluster.local:9092
+  eureka.client.serviceUrl.defaultZone: http://eureka-server:8761/eureka/
+  # application.yml: |- 
+  #   spring:
+  #     data:
+  #       mongodb:
+  #         uri: mongodb://hsma:admin@mongodb.default.svc.cluster.local:27017/user-management
+  #     cloud:
+  #       stream:
+  #         kafka:
+  #           binder:
+  #             enableObservation: true
+  #             brokers: kafka.default.svc.cluster.local:9092
+  #         bindings:
+  #           userChannel-out-0:
+  #             destination: userChannel
+  #             contentType: application/json
+  #   eureka:
+  #     client:
+  #       serviceUrl:
+  #         defaultZone: http://eurekaserver-service:8761/eureka/
+  #     instance:
+  #       preferIpAddress: true

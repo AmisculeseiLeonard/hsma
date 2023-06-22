@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: mail-service
+
+  mail:
+    host: smtp.gmail.com
+    username: healthcare.social.media.app@gmail.com
+    password: ewcxnpagsgofbcok
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+          enableObservation: true
+        bindings:
+          mailConsumer-in-0:
+            consumer:
+              startOffset: latest
+      bindings:
+        mailConsumer-in-0:
+          destination: userChannel,appointmentChannel
+          contentType: application/json
+          group: mailService
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    preferIpAddress: true
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+
+urlValidation: "http://localhost:8090/user/activateAccount?id="
+urlAcceptAppointment: "http://localhost:8090/appointment/accept/"
+urlRefuseAppointment: "http://localhost:8090/appointment/refuse/"

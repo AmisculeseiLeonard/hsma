@@ -1,0 +1,9 @@
+global:
+  configMapName: hsma-configmap
+  secretConfigName:  connection-credentials-secret
+  eurekaServerURL: http://eureka-server:8761/eureka/
+  kafkaBrokerURL: kafka.default.svc.cluster.local:9092
+  zipkinBaseURL:  http://zipkin:9411/api/v2/spans
+  urlValidation: http://api-gateway:8090/user/activateAccount?id=
+  urlAcceptAppointment: http://api-gateway:8090/appointment/accept/
+  urlRefuseAppointment: http://api-gateway:8090/appointment/refuse/

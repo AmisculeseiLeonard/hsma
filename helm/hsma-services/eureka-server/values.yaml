@@ -1,0 +1,25 @@
+deploymentName: eureka-server-deployment
+deploymentLabel: eureka-server
+
+replicaCount: 1
+
+image:
+  repository: leonarda123/eureka-server
+  tag: latest
+
+containerPort: 8761
+
+service:
+  type: ClusterIP
+  port: 8761
+  targetPort: 8761
+
+kafka_enabled: false
+eureka_enabled: false
+zipkin_enabled: false
+mailing_enabled: false
+mongo_user_management_enabled: false
+mongo_post_enabled: false
+neo4j_enabled: false
+postgresql_appointments_enabled: false
+postgresql_feed_enabled: false

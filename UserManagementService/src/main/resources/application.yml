@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: user-management-service
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/user-management
+
+  cloud:
+    stream:
+      kafka:
+        binder:
+          enableObservation: true
+          brokers: localhost:9092
+      bindings:
+        userChannel-out-0:
+          destination: userChannel
+          contentType: application/json
+server:
+  port: 8081
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    preferIpAddress: true
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+

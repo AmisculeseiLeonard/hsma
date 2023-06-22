@@ -1,0 +1,25 @@
+deploymentName: api-gateway-deployment
+deploymentLabel: api-gateway
+
+replicaCount: 1
+
+image:
+  repository: leonarda123/api-gateway-service
+  tag: latest
+
+containerPort: 8090
+
+service:
+  type: LoadBalancer
+  port: 8090
+  targetPort: 8090
+
+kafka_enabled: false
+eureka_enabled: true
+zipkin_enabled: false
+mailing_enabled: false
+mongo_user_management_enabled: false
+mongo_post_enabled: false
+neo4j_enabled: false
+postgresql_appointments_enabled: false
+postgresql_feed_enabled: false

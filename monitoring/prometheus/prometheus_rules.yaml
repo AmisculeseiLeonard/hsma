@@ -1,0 +1,17 @@
+groups:
+  - name: gateway rules
+    rules:
+      - alert: ddos attack
+        expr: sum(rate(http_server_requests_seconds_count{status=~ "401|403",uri !~"/actuator/*"} [5m])) / sum(rate(http_server_requests_seconds_count{uri !~"/actuator/*"} [5m])) > 0.2
+        labels:
+          severity: critical
+        for: 10m
+        annotations:
+          summary: Unusual rate of unauthorized/forbidden responses
+      - alert: requests latancy
+        expr: sum(rate(http_server_requests_seconds_sum{application="Gateway Service"} [5m])) by (application) / sum(rate(http_server_requests_seconds_sum{application="Gateway Service"} [24h])) by (application) > 5
+        labels:
+          severity: warning
+        for: 10m
+        annotations:
+          summary: High latency on requests 

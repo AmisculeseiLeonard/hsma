@@ -1,0 +1,25 @@
+deploymentName: relationship-deployment
+deploymentLabel: relationship
+
+replicaCount: 1
+
+image:
+  repository: leonarda123/relationship-service
+  tag: latest
+
+containerPort: 8084
+
+service:
+  type: ClusterIP
+  port: 8084
+  targetPort: 8084
+
+kafka_enabled: true
+eureka_enabled: true
+zipkin_enabled: false
+mailing_enabled: false
+mongo_user_management_enabled: false
+mongo_post_enabled: false
+neo4j_enabled: true
+postgresql_appointments_enabled: false
+postgresql_feed_enabled: false

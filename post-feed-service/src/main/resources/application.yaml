@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: post-feed-service
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://localhost:5432/feed
+    username: postgres
+    password: admin
+    driverClassName: org.postgresql.Driver
+
+  cloud:
+    stream:
+      function:
+        definition: feedFollowConsumer;feedPostConsumer
+      kafka:
+        binder:
+          brokers: localhost:9092
+        bindings:
+          feedConsumer-in-0:
+            consumer:
+              startOffset: earliest
+      bindings:
+        feedConsumer-in-0:
+          destination: followChannel,postChannel,postsResponseChannel
+          contentType: application/json
+          group: feedGroup
+        postsRequestChannel-out-0:
+          destination: postsRequestChannel
+          contentType: application/json
+
+server:
+  port: 8086
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    preferIpAddress: true

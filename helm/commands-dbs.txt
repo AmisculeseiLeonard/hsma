@@ -1,0 +1,46 @@
+helm install kafka oci://registry-1.docker.io/bitnamicharts/kafka
+
+helm install mongodb bitnami/mongodb --set auth.usernames[0]="hsma",auth.usernames[1]="hsma",auth.password=hsma,auth.databases[0]="user-management",auth.databases[1]="post"
+
+helm install postgresql bitnami/postgresql --set auth.username=hsma,auth.password=hsma
+//enter postgresql pod and create databases
+kubectl exec -it postgresql-0 -- /bin/bash
+createdb --username=hsma --password appointments
+createdb --username=hsma --password feed
+psql postgresql://hsma:hsma@postgresql.default:5432/appointments
+
+helm repo add equinor-charts https://equinor.github.io/helm-charts/charts/
+
+helm upgrade --install neo4j-community equinor-charts/neo4j-community --set acceptLicenseAgreement=yes --set neo4jPassword=hsma
+
+helm install my-release ygqygq2/zipkin
+
+helm install monitoring prometheus-community/kube-prometheus-stack
+
+
+kubectl create secret generic mongodb-secret \
+--from-literal=MONGO_CONNECTION_USER_MANAGEMENT="mongodb://hsma:hsma@mongodb.default:27017/user-management" \
+--from-literal=MONGO_CONNECTION_POST="mongodb://hsma:hsma@mongodb.default:27017/post"
+
+kubectl create secret generic postgresql-secret \
+--from-literal=POSTGRESQL_CONNECTION_APPOINTMENTS="postgresql://hsma:hsma@postgresql.default:5432/appointments" \
+--from-literal=POSTGRESQL_CONNECTION_FEED="postgresql://hsma:hsma@postgresql.default:5432/feed"
+
+kubectl create secret generic neo4j-secret \
+--from-literal=NEO4J_CONNECTION_URI="neo4j://localhost:7687" \
+--from-literal=NEO4J_USERNAME="neo4j" \
+--from-literal=NEO4J_PASSWORD="hsma"
+
+
+kubectl create secret generic connection-credentials-secret \
+--from-literal=MONGO_CONNECTION_USER_MANAGEMENT="mongodb://hsma:hsma@mongodb.default:27017/user-management" \
+--from-literal=MONGO_CONNECTION_POST="mongodb://hsma:hsma@mongodb.default:27017/post" \
+--from-literal=POSTGRESQL_CONNECTION_APPOINTMENTS="jdbc:postgresql://postgresql.default:5432/appointments" \
+--from-literal=POSTGRESQL_CONNECTION_FEED="jdbc:postgresql://postgresql.default:5432/feed" \
+--from-literal=POSTGRESQL_USERNAME="hsma" \
+--from-literal=POSTGRESQL_PASSWORD="hsma" \
+--from-literal=POSTGRESQL_USERNAME_ROOT="postgres" \
+--from-literal=POSTGRESQL_PASSWORD_ROOT="RaAC2jDzyO" \
+--from-literal=NEO4J_CONNECTION_URI="neo4j://localhost:7687" \
+--from-literal=NEO4J_USERNAME="neo4j" \
+--from-literal=NEO4J_PASSWORD="hsma"

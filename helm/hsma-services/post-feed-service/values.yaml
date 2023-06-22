@@ -1,0 +1,25 @@
+deploymentName: post-feed-deployment
+deploymentLabel: post-feed
+
+replicaCount: 1
+
+image:
+  repository: leonarda123/post-feed-service
+  tag: latest
+
+containerPort: 8086
+
+service:
+  type: ClusterIP
+  port: 8086
+  targetPort: 8086
+
+kafka_enabled: true
+eureka_enabled: true
+zipkin_enabled: false
+mailing_enabled: false
+mongo_user_management_enabled: false
+mongo_post_enabled: false
+neo4j_enabled: false
+postgresql_appointments_enabled: false
+postgresql_feed_enabled: true

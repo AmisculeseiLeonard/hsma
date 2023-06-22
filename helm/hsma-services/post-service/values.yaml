@@ -1,0 +1,25 @@
+deploymentName: post-deployment
+deploymentLabel: post
+
+replicaCount: 1
+
+image:
+  repository: leonarda123/post-service
+  tag: latest
+
+containerPort: 8085
+
+service:
+  type: ClusterIP
+  port: 8085
+  targetPort: 8085
+
+kafka_enabled: true
+eureka_enabled: true
+zipkin_enabled: false
+mailing_enabled: false
+mongo_user_management_enabled: false
+mongo_post_enabled: true
+neo4j_enabled: false
+postgresql_appointments_enabled: false
+postgresql_feed_enabled: false

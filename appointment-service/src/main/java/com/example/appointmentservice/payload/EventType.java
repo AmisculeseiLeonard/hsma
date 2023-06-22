@@ -1,0 +1,5 @@
+package com.example.appointmentservice.payload;
+
+public enum EventType {
+    USER_CREATED,USER_ACCOUNT_CONFIRMED,USER_UPDATED, APPOINTMENT_REQUEST, APPOINTMENT_ACCEPTED, APPOINTMENT_REFUSED
+}

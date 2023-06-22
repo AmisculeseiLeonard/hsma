@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: relationship-service
+
+  data:
+    neo4j:
+      uri: bolt://localhost:7687
+      authentication:
+        username: neo4j
+        password: admin
+
+  cloud:
+    stream:
+#      function:
+#        definition: graphConsumer
+      kafka:
+        binder:
+          brokers: localhost:9092
+        bindings:
+          graphConsumer-in-0:
+            consumer:
+              startOffset: earliest
+      bindings:
+        graphConsumer-in-0:
+          destination: userChannel
+          contentType: application/json
+          group: graphService
+        followChannel-out-0:
+          destination: followChannel
+          contentType: application/json
+
+server:
+  port: 8084
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    preferIpAddress: true

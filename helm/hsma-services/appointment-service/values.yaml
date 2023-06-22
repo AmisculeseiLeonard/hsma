@@ -1,0 +1,25 @@
+deploymentName: appointment-deployment
+deploymentLabel: appointment
+
+replicaCount: 1
+
+image:
+  repository: leonarda123/appointment-service
+  tag: latest
+
+containerPort: 8088
+
+service:
+  type: ClusterIP
+  port: 8088
+  targetPort: 8088
+
+kafka_enabled: true
+eureka_enabled: true
+zipkin_enabled: false
+mailing_enabled: false
+mongo_user_management_enabled: false
+mongo_post_enabled: false
+neo4j_enabled: false
+postgresql_appointments_enabled: true
+postgresql_feed_enabled: false

@@ -1,0 +1,25 @@
+deploymentName: mail-deployment
+deploymentLabel: mail
+
+replicaCount: 1
+
+image:
+  repository: leonarda123/mail-service
+  tag: latest
+
+containerPort: 8080
+
+service:
+  type: ClusterIP
+  port: 8080
+  targetPort: 8080
+
+kafka_enabled: true
+eureka_enabled: true
+zipkin_enabled: false
+mailing_enabled: true
+mongo_user_management_enabled: false
+mongo_post_enabled: false
+neo4j_enabled: false
+postgresql_appointments_enabled: false
+postgresql_feed_enabled: false

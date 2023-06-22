@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: post-service
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/post
+
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+        bindings:
+          postConsumer-in-0:
+            consumer:
+              startOffset: earliest
+      bindings:
+        postChannel-out-0:
+          destination: postChannel
+          contentType: application/json
+        postConsumer-in-0:
+          destination: postsRequestChannel
+          contentType: application/json
+          group: feedGroup
+        postsResponseChannel-out-0:
+          destination: postsResponseChannel
+          contentType: application/json
+
+server:
+  port: 8085
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    preferIpAddress: true
